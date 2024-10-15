@@ -1,0 +1,66 @@
+# https://ejmastnak.com/tutorials/vim-latex/ultisnips/
+# Helper function to test if in math-mode (Latex)
+global !p
+def math():
+  return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+endglobal
+
+# #Regex templates for checking we are not in word, number, etc.
+#snippet "([^a-zA-Z])trigger" "Expands if 'trigger' is typed after characters other than a-z or A-Z" r
+#`!p snip.rv = match.group(1)`snippet body
+#endsnippet
+#
+#snippet "(^|[^a-zA-Z])trigger" "Expands on a new line or after characters other than a-z or A-Z" r
+#`!p snip.rv = match.group(1)`snippet body
+#endsnippet
+#
+#snippet "(^|[\W])trigger" "Expands on a new line or after characters other than 0-9, a-z, or A-Z" r
+#`!p snip.rv = match.group(1)`snippet body
+#endsnippet
+
+
+# Prevent fraction expansion in words containing "ff", only in math-mode
+context "math()"
+snippet "(^|[^a-zA-Z])ff" "\frac{}{}" rA
+`!p snip.rv = match.group(1)`\frac{${1:${VISUAL:}}}{$2}$0
+endsnippet
+
+# Snippet for typewriting font
+snippet tt "The \texttt{} command for typewriter-style font"
+\texttt{$1}$0
+endsnippet
+
+# Snippet for inserting named links with href
+snippet hr "The hyperref package's \href{}{} command (for url links)"
+\href{${1:url}}{${2:display name}}$0
+endsnippet
+
+# Snippet for creating new generic LaTeX environments
+snippet env "New LaTeX environment" b
+\begin{$1}
+    $2
+\end{$1}
+$0
+endsnippet
+
+# Snippet for italic font
+snippet tii "The \textit{} command for italic font"
+\textit{${1:${VISUAL:}}}$0
+endsnippet
+
+# Snippet for italic font
+snippet tbb "The \textbf{} command for italic font"
+\textbf{${1:${VISUAL:}}}$0
+endsnippet
+
+# Quickly insert a zero subscript
+context "math()"
+snippet "([a-zA-Z]|[\}\)\]\|'])00" "Automatic 0 subscript" rA
+`!p snip.rv = match.group(1)`_{0}
+endsnippet
+
+# Snippet for math subscripts with upright font
+context "math()"
+snippet "([\w]|[\}\)\]\|])sd" "Subscript with upright text" rA
+`!p snip.rv = match.group(1)`_{\mathrm{${1:${VISUAL:}}}}$0
+endsnippet
