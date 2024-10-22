@@ -12,7 +12,6 @@ vim.opt.softtabstop = 2       -- Number of spaces a <Tab> counts for while editi
 
 vim.g.UltiSnipsExpandTrigger        = '<Tab>'
 vim.g.UltiSnipsListSnippets         = '<C-Tab>'
-vim.g.UltiSnipsJumpForwardTrigger   = '<C-Tab>'
-vim.g.UltiSnipsJumpBackwardTrigger  = '<S-Tab>'
-
-
+vim.g.UltiSnipsJumpForwardTrigger   = '<C-j>'
+vim.g.UltiSnipsJumpBackwardTrigger  = '<C-k>'
+vim.g.UltiSnipsAuthor               = 'William Jardee'

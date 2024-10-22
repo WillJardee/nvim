@@ -7,4 +7,65 @@ $0
 endsnippet
 
 
+# snippets
+snippet todoc "todo with line comment" b
+`!v GetCommentMarker()`TODO: $1
+endsnippet
+
+snippet todob "todo with block comment" b
+`!v GetBlockCommentMarks()[0]`TODO: $1`!v GetBlockCommentMarks()[1]`
+endsnippet
+
+#https://choosealicense.com/licenses/mit/
+snippet mitlicense "Insert MIT license header" b
+`!v GetCommentMarker()`MIT License
+`!v GetCommentMarker()`
+`!v GetCommentMarker()`Copyright (c) `!v strftime("%Y")` `!v g:UltiSnipsAuthor`
+`!v GetCommentMarker()`
+`!v GetCommentMarker()`Permission is hereby granted, free of charge, to any person obtaining a copy
+`!v GetCommentMarker()`of this software and associated documentation files (the "Software"), to deal
+`!v GetCommentMarker()`in the Software without restriction, including without limitation the rights
+`!v GetCommentMarker()`to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+`!v GetCommentMarker()`copies of the Software, and to permit persons to whom the Software is
+`!v GetCommentMarker()`furnished to do so, subject to the following conditions:
+`!v GetCommentMarker()`
+`!v GetCommentMarker()`The above copyright notice and this permission notice shall be included in all
+`!v GetCommentMarker()`copies or substantial portions of the Software.
+`!v GetCommentMarker()`
+`!v GetCommentMarker()`THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+`!v GetCommentMarker()`IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+`!v GetCommentMarker()`FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+`!v GetCommentMarker()`AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+`!v GetCommentMarker()`LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+`!v GetCommentMarker()`OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+`!v GetCommentMarker()`SOFTWARE.
+endsnippet
+
+#https://choosealicense.com/licenses/unlicense/
+snippet unlicense "Insert the unlicense header" b
+`!v GetCommentMarker()`This is free and unencumbered software released into the public domain.
+`!v GetCommentMarker()`
+`!v GetCommentMarker()`Anyone is free to copy, modify, publish, use, compile, sell, or
+`!v GetCommentMarker()`distribute this software, either in source code form or as a compiled
+`!v GetCommentMarker()`binary, for any purpose, commercial or non-commercial, and by any
+`!v GetCommentMarker()`means.
+`!v GetCommentMarker()`
+`!v GetCommentMarker()`In jurisdictions that recognize copyright laws, the author or authors
+`!v GetCommentMarker()`of this software dedicate any and all copyright interest in the
+`!v GetCommentMarker()`software to the public domain. We make this dedication for the benefit
+`!v GetCommentMarker()`of the public at large and to the detriment of our heirs and
+`!v GetCommentMarker()`successors. We intend this dedication to be an overt act of
+`!v GetCommentMarker()`relinquishment in perpetuity of all present and future rights to this
+`!v GetCommentMarker()`software under copyright law.
+`!v GetCommentMarker()`
+`!v GetCommentMarker()`THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+`!v GetCommentMarker()`EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+`!v GetCommentMarker()`MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+`!v GetCommentMarker()`IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+`!v GetCommentMarker()`OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+`!v GetCommentMarker()`ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+`!v GetCommentMarker()`OTHER DEALINGS IN THE SOFTWARE.
+`!v GetCommentMarker()`
+`!v GetCommentMarker()`For more information, please refer to <https://unlicense.org>
+endsnippet
 

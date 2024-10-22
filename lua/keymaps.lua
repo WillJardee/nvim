@@ -32,11 +32,14 @@ wk.add({
     {'<a-j>', ':lua vim.cmd("resize +2")<cr>', { noremap = true, silent = true }, desc = "Move window down" },
     {'<a-l>', ':lua vim.cmd("vertical resize -2")<cr>', { noremap = true, silent = true }, desc = "Move window in" },
     {'<a-h>', ':lua vim.cmd("vertical resize +2")<cr>', { noremap = true, silent = true }, desc = "Move window out" },
-    {'<Leader>id', ':lua insert_date()<CR>', { noremap = true, silent = true }, desc = "Insert date"},
-    {'<Leader>it', ':lua insert_time()<CR>', { noremap = true, silent = true }, desc = "Insert time"},
-    {'<Leader>ij', ':lua insert_datetime()<CR>', { noremap = true, silent = true }, desc = "Insert date time"},
+    {'<Leader>id', ':lua INSERT_DATE()<CR>', { noremap = true, silent = true }, desc = "Insert date"},
+    {'<Leader>it', ':lua INSERT_TIME()<CR>', { noremap = true, silent = true }, desc = "Insert time"},
+    {'<Leader>ij', ':lua INSERT_DATETIME()<CR>', { noremap = true, silent = true }, desc = "Insert date time"},
     {'<a-c>', ':close<CR>', opts, desc = "Close" },
   },
+  { mode = {'t'},
+    {'<a-c>', [[<C-\><C-n>:q<CR>]], opts, desc="Exit Terminal"}
+  }
 })
 
 -- Telescope plugin keymaps
@@ -52,7 +55,7 @@ vim.api.nvim_set_keymap('n', '<F5>', ':lua ToggleTheme()<CR>', { noremap = true,
 
 
 -- Function to insert the current date based on file type
-function insert_date()
+function INSERT_DATE()
     local format
     local filetype = vim.bo.filetype  -- Get the current file's type
 
@@ -66,14 +69,14 @@ function insert_date()
     vim.api.nvim_put({ date }, 'c', true, true)  -- Inserts the date at the cursor
 end
 
-function insert_time()
+function INSERT_TIME()
     local format = "%H:%M (%Z)"
 
     local date = os.date(format)  -- Formats the date according to the file type
     vim.api.nvim_put({ date }, 'c', true, true)  -- Inserts the date at the cursor
 end
 
-function insert_datetime()
+function INSERT_DATETIME()
     local format 
     local filetype = vim.bo.filetype  -- Get the current file's type
 

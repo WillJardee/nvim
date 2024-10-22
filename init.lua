@@ -1,3 +1,5 @@
+vim.cmd('source ~/.config/nvim/vimscript/utils.vim')
+
 require('opts')         -- Options
 require("config.lazy")  -- Package Manager
 
