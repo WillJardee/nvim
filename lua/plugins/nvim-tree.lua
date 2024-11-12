@@ -7,7 +7,7 @@ return {
   config = function()
     require('nvim-tree').setup {
       view = {
-        width = 30,  -- width of the tree window
+        width = 40,  -- width of the tree window
         side = 'right',  -- position of the tree ('left' or 'right')
       },
       renderer = {
