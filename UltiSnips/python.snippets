@@ -1,5 +1,99 @@
 
+
+snippet property "Set a private property with some prior validation." bm
+@property
+def _${1:var}(self):
+    return self.__$1
+
+@_$1.setter
+def _$1(self, $1):
+    assert self._between($1, "$1", lower=0)
+    self.__$1 = int($1)
+endsnippet
+
 snippet open "open with statement" b
 with open(${1:filename}, "${2:wra}") as ${3:filevar}:
+endsnippet
+
+snippet """ "Docstring" bm
+"""${1:short description}"""
+endsnippet
+
+
+snippet """numpy "Add numpy docstring" bm  
+"""${1:short description}
+
+${2:long description}
+
+Parameters
+----------
+${3:param1} : ${4:type}, default ${5:default option}
+    ${6:param1 description}
+
+Returns
+-------
+${7:return type}
+    ${8:return description}
+"""
+endsnippet
+
+snippet """numpy-full "Add numpy docstring" bm  
+"""${1:short description}
+
+${2:long description}
+
+Note
+----
+${3:note}
+
+Parameters
+----------
+${4:param1} : ${5:type}, default ${6:default option}
+    ${7:param1 description}
+
+Returns
+-------
+${8:return type}
+    ${9:return description}
+
+Raises
+------
+${10:error}
+    ${11:case for this error}
+"""
+endsnippet
+
+snippet """google "Add google docstring" bm
+"""${1:short description}
+
+${2:long description}
+
+Args:
+	${3:param1} (${4:type}): ${5:param1 description}
+
+Returns:
+	${6:return type}: ${7:return description}
+
+"""
+endsnippet
+
+snippet """google-full "Add google docstring" bm
+"""${1:short description}
+
+${2:long description}
+
+Note:
+	${3:note}
+
+Args:
+	${4:param1} (${5:type}): ${6:param1 description}
+
+Returns:
+	${8:return type}: ${9:return description}
+
+Raises:
+	${10:error}: ${11:case for this error}
+
+"""
 endsnippet
 

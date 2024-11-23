@@ -1,6 +1,8 @@
 local wk = require("which-key")
 local harpoon = require("harpoon")
 
+-- local makefile_telescope = require(".utils.telescope_makefile")
+
 -- Define keymap options
 local opts = { noremap = true, silent = true }
 local toggle_telescope
@@ -43,26 +45,33 @@ wk.add({
   }
 })
 
+-- local open_readme = require('utils.open_readme')
 -- Telescope plugin keymaps
 wk.add({
   { mode = {'n'},
-    {'gd', vim.lsp.buf.definition, opts, desc = "jump to def" },
+    { "<leader>f", "", desc = "+find"},
     {'<leader>fd', vim.diagnostic.open_float, opts, desc = "Show diagnostic at cursor"},
     {'<leader>ff', ':Telescope find_files<CR>', opts},
     {'<leader>fg', ':Telescope live_grep<CR>', opts},
     {'<leader>fb', ':Telescope buffers<CR>', opts},
     {'<leader>fh', ':Telescope help_tags<CR>', opts},
-    {'<leader>pp', ':Telescope projects<CR>', opts},
+    {'<leader>fm', ':Telescope make<CR>', opts},
+    {'<leader> ', ':Telescope make<CR><CR>', opts},
+    {'<leader>fp', ':Telescope projects<CR>', opts},
     {'<leader>fe', ':NvimTreeToggle<CR>', opts},
-    {'<leader>ga', function() harpoon:list():add() end, opts, desc = "Harpoon add"},
-    {"<leader>gf", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, opts, desc = "Harpoon quick list"},
-    {"<leader>gq", function() harpoon:list():select(1) end, opts, desc = "Harpoon add 1"},
-    {"<leader>gw", function() harpoon:list():select(2) end, opts, desc = "Harpoon add 2"},
-    {"<leader>ge", function() harpoon:list():select(3) end, opts, desc = "Harpoon add 3"},
-    {"<leader>gr", function() harpoon:list():select(4) end, opts, desc = "Harpoon add 4"},
-    {"<leader>gg", function() toggle_telescope(harpoon:list()) end, opts, desc = "Harpoon Telescope"},
-    {"<leader>go", function() harpoon:list():prev() end, opts, desc = "Harpoon prev"},
-    {"<leader>gi", function() harpoon:list():next() end, opts, desc = "Harpoon next"},
+    {'<leader>fl', '<cmd>AerialToggle!<CR>', opts, desc="Toggle Aerial"},
+    -- {'<leader>pr', open_readme, opts, desc="Open project readme"},
+    -- {"<leader>gq", function() harpoon:list():select(1) end, opts, desc = "Harpoon add 1"},
+    -- {"<leader>gw", function() harpoon:list():select(2) end, opts, desc = "Harpoon add 2"},
+    -- {"<leader>ge", function() harpoon:list():select(3) end, opts, desc = "Harpoon add 3"},
+    -- {"<leader>gr", function() harpoon:list():select(4) end, opts, desc = "Harpoon add 4"},
+    { "<leader>g", "", desc = "+file movement"},
+    {'gd', vim.lsp.buf.definition, opts, desc = "jump to def" },
+    {"<leader>gf", ":lua require('harpoon.ui').toggle_quick_menu()<CR>", opts, desc = "Harpoon quick list"},
+    {"<leader>ga", ":lua require('harpoon.mark').add_file()<CR>", opts, desc = "Harpoon quick list"},
+    {"<leader>gg", ":Telescope harpoon marks<CR>", opts, desc = "Harpoon Telescope"},
+    {"<leader>go", ":lua require('harpoon.ui').nav_next()<CR>", opts, desc = "Harpoon prev"},
+    {"<leader>gi", ":lua require('harpoon.ui').nav_prev()<CR>", opts, desc = "Harpoon next"},
   }
 })
 
@@ -70,7 +79,7 @@ wk.add({
 -- LSP and degugging
 wk.add({
   { mode = {'n'},
-    {'gd', vim.lsp.buf.definition, opts, desc = "jump to def" },
+    { "<leader>g", "", desc = "+error handling", icon={ icon = "" }},
     {'<leader>ee', vim.diagnostic.open_float, opts, desc = "Show diagnostic at cursor"},
     {'<leader>el', vim.diagnostic.setloclist, opts, desc = "List buffer diagnostics"},
     {'<leader>ew', vim.diagnostic.setqflist, opts, desc = "List workspace diagnostics"},
@@ -85,19 +94,42 @@ wk.add({
   }
 })
 
+wk.add({
+  { mode = {"n", "v"},
+    { "<leader>d", "", desc = "+debug"},
+    { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end, desc = "Breakpoint Condition" },
+    { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+    { "<leader>dc", function() require("dap").continue() end, desc = "Run/Continue" },
+    { "<leader>da", function() require("dap").continue({ before = get_args }) end, desc = "Run with Args" },
+    { "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+    { "<leader>dg", function() require("dap").goto_() end, desc = "Go to Line (No Execute)" },
+    { "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+    { "<leader>dj", function() require("dap").down() end, desc = "Down" },
+    { "<leader>dk", function() require("dap").up() end, desc = "Up" },
+    { "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+    { "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
+    { "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
+    { "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
+    { "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+    { "<leader>ds", function() require("dap").session() end, desc = "Session" },
+    { "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+    { "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+  },
+})
+
 -- Themes
 wk.add({
   { mode = {'n'} },
     {'<F5>', ':lua ToggleTheme(1)<CR>', opts, desc="Toggle theme +1."},
     {'<F4>', ':lua ToggleTheme(-1)<CR>', opts, desc="Toggle theme -1."},
-    {'<F3>', ':lua ToggleLightMode()<CR>', opts, desc="Toggle light and dark mode"}
+    {'<F6>', ':lua ToggleLightMode()<CR>', opts, desc="Toggle light and dark mode"}
 })
 
 wk.add({
   { mode = {'n'} },
-    {'<Leader>id', ':lua insert_date()<CR>', { noremap = true, silent = true }, desc = "Insert date"},
-    {'<Leader>it', ':lua insert_time()<CR>', { noremap = true, silent = true }, desc = "Insert time"},
-    {'<Leader>ij', ':lua insert_datetime()<CR>', { noremap = true, silent = true }, desc = "Insert date time"},
+    {'<Leader>id', ':lua INSERT_DATE()<CR>', { noremap = true, silent = true }, desc = "Insert date"},
+    {'<Leader>it', ':lua INSERT_TIME()<CR>', { noremap = true, silent = true }, desc = "Insert time"},
+    {'<Leader>ij', ':lua INSERT_DATETIME()<CR>', { noremap = true, silent = true }, desc = "Insert date time"},
 })
 
 
@@ -136,23 +168,4 @@ function INSERT_DATETIME()
     local date = os.date(format)  -- Formats the date according to the file type
     vim.api.nvim_put({ date }, 'c', true, true)  -- Inserts the date at the cursorend
 end
-
--- basic telescope configuration
-local conf = require("telescope.config").values
-function toggle_telescope(harpoon_files)
-    local file_paths = {}
-    for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-    end
-
-    require("telescope.pickers").new({}, {
-        prompt_title = "Harpoon",
-        finder = require("telescope.finders").new_table({
-            results = file_paths,
-        }),
-        previewer = conf.file_previewer({}),
-        sorter = conf.generic_sorter({}),
-    }):find()
-end
-
 

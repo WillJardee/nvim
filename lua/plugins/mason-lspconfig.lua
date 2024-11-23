@@ -44,6 +44,7 @@ return {
           },
         },
       },
+      ast_grep = {},
     }
     local servers = {
       clangd = {
@@ -55,6 +56,21 @@ return {
       tsserver = {},
       phpactor = {},
       pyright = {},
+      ast_grp = {
+        filetypes = {
+          "go",
+          "javascript",
+          "typescript",
+          "css",
+          "html",
+          "json",
+          "yaml",
+        },
+        single_file_support = false,
+      },
+      texlab = {
+        filetypes = { 'sty' }
+      }
     }
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require('cmp_nvim_lsp').default_capabilities()

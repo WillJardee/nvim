@@ -15,11 +15,14 @@ vim.g.UltiSnipsListSnippets         = '<C-Tab>'
 vim.g.UltiSnipsJumpForwardTrigger   = '<C-j>'
 vim.g.UltiSnipsJumpBackwardTrigger  = '<C-k>'
 vim.g.UltiSnipsAuthor               = 'William Jardee'
-vim.g.UltiSnipsJumpForwardTrigger   = '<C-Tab>'
-vim.g.UltiSnipsJumpBackwardTrigger  = '<S-Tab>'
+vim.g.ultisnips_python_style        = "numpy"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+
+-- disables netrw to make room for nvim-tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Options are suggestion from ChatGPT
 -- Editing and Cursor Behavior

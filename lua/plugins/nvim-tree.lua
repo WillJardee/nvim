@@ -3,11 +3,15 @@ return {
   requires = {
     'kyazdani42/nvim-web-devicons', -- optional, for file icons
   },
-  cmd = 'NvimTreeToggle',  -- load on command
+  lazy = false,
+  -- cmd = 'NvimTreeToggle',  -- load on command
   config = function()
     require('nvim-tree').setup {
+      disable_netrw = true,
+      hijack_cursor = true,
+      respect_buf_cwd = true,
       view = {
-        width = 40,  -- width of the tree window
+        width = 30,  -- width of the tree window
         side = 'right',  -- position of the tree ('left' or 'right')
       },
       renderer = {

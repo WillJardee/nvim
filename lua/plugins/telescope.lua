@@ -1,7 +1,33 @@
 return {
   'nvim-telescope/telescope.nvim',
-  requires = { 'nvim-lua/plenary.nvim', 'ahmedkhalf/project.nvim' },
+  dependencies = {
+    "sopa0/telescope-makefile",
+    "akinsho/toggleterm.nvim",
+    "ThePrimeagen/harpoon",
+  },
+  requires = {
+    'nvim-lua/plenary.nvim',
+    'ahmedkhalf/project.nvim',
+    'sopa0/telescope-makefile',
+    "ThePrimeagen/harpoon",
+  },
+
   config = function()
-    require('telescope').load_extension('projects')
-  end
+
+    require('telescope').setup {
+      prompt_prefix = ' ',
+      path_display = { 'smart' },
+
+      -- project = {
+      --     hidden_files = true, -- default: false
+      --     theme = 'dropdown',
+      --     order_by = 'asc',
+      --     search_by = 'title',
+      --     sync_with_nvim_tree = true, -- default false
+      --   },
+    }
+    pcall(require'telescope'.load_extension('projects'))
+    pcall(require'telescope'.load_extension('harpoon'))
+    pcall(require'telescope'.load_extension('make'))
+  end,
 }
