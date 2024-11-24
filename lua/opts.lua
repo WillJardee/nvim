@@ -24,6 +24,13 @@ vim.g.maplocalleader = "\\"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- Improve diff rendering for Fugitive
+vim.opt.diffopt:append({
+    "vertical",        -- Vertical diffs
+    "algorithm:histogram", -- Better diff algorithm
+    "indent-heuristic" -- Smarter alignment of diffs
+})
+
 -- Options are suggestion from ChatGPT
 -- Editing and Cursor Behavior
 vim.o.cursorline = true              -- Highlight the current line
