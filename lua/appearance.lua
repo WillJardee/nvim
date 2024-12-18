@@ -33,7 +33,7 @@ local light_themes = {
   'blue',
 }
 
-local dark_current_theme = 9
+local dark_current_theme = 12
 local light_current_theme = 3
 local lightmode = false
 

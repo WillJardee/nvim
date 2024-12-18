@@ -79,7 +79,7 @@ wk.add({
 -- LSP and degugging
 wk.add({
   { mode = {'n'},
-    { "<leader>g", "", desc = "+error handling", icon={ icon = "" }},
+    { "<leader>e", "", desc = "+error handling", icon={ icon = "" }},
     {'<leader>ee', vim.diagnostic.open_float, opts, desc = "Show diagnostic at cursor"},
     {'<leader>el', vim.diagnostic.setloclist, opts, desc = "List buffer diagnostics"},
     {'<leader>ew', vim.diagnostic.setqflist, opts, desc = "List workspace diagnostics"},
@@ -93,6 +93,21 @@ wk.add({
     {'<leader>eo', vim.lsp.buf.outgoing_calls, opts, desc = "Show outgoing calls"},
   }
 })
+
+wk.add({
+  { mode = {'n'},
+    { "<leader>s", "", group = "spell", icon={ icon = "\u{F168C}" }},
+    {'<leader>su', ":GrammarousCheck<CR>", opts, desc = "Grammarous Check"},
+    {'<leader>sr', ":GrammarousReset<CR>", opts, desc = "Grammarous Reset"},
+    {'<leader>sf', "<Plug>(grammarous-fixit)", opts, desc = "Fit it"},
+    {'<leader>sd', "<Plug>(grammarous-open-info-window)", opts, desc = "Open info window"},
+    {'<leader>sq', "<Plug>(grammarous-close-info-window)", opts, desc = "Close info window"},
+    {'<leader>sj', "<Plug>(grammarous-move-to-next-error)", opts, desc = "Move to next error"},
+    {'<leader>sk', "<Plug>(grammarous-move-to-previous-error)", opts, desc = "Move to previous error"},
+  }
+})
+
+
 
 -- wk.add({
 --   { mode = {"n", "v"},

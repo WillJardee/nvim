@@ -4,12 +4,14 @@ return {
     "sopa0/telescope-makefile",
     "akinsho/toggleterm.nvim",
     "ThePrimeagen/harpoon",
+    -- "tpope/vim-fugitive"
   },
   requires = {
     'nvim-lua/plenary.nvim',
     'ahmedkhalf/project.nvim',
     'sopa0/telescope-makefile',
     "ThePrimeagen/harpoon",
+    -- "tpope/vim-fugitive"
   },
 
   config = function()
@@ -28,6 +30,7 @@ return {
     }
     pcall(require'telescope'.load_extension('projects'))
     pcall(require'telescope'.load_extension('harpoon'))
+    -- pcall(require('telescope').load_extension('vim-fugitive'))
     pcall(require'telescope'.load_extension('make'))
   end,
 }

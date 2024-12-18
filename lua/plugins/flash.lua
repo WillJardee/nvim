@@ -1,5 +1,6 @@
 return {
   "folke/flash.nvim",
+  enabled = false,  -- Will only load if flash_enabled is true
   event = "VeryLazy",
   ---@type Flash.Config
   opts = {},

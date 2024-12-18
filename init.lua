@@ -1,4 +1,5 @@
-vim.cmd('source ~/.config/nvim/vimscript/utils.vim')
+vim.g.config_path = vim.fn.stdpath('config')
+vim.cmd("source  " .. vim.g.config_path .. "/vimscript/utils.vim")
 
 require("config.lazy")  -- Package Manager
 require("config.autocmds")
