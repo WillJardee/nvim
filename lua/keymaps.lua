@@ -56,7 +56,7 @@ wk.add({
     {'<leader>fb', ':Telescope buffers<CR>', opts},
     {'<leader>fh', ':Telescope help_tags<CR>', opts},
     {'<leader>fm', ':Telescope make<CR>', opts},
-    {'<leader> ', ':Telescope make<CR><CR>', opts},
+    {'<leader> ',  ':lua vim.cmd("!make")<CR>', opts},
     {'<leader>fp', ':Telescope projects<CR>', opts},
     {'<leader>fe', ':NvimTreeToggle<CR>', opts},
     {'<leader>fl', '<cmd>AerialToggle!<CR>', opts, desc="Toggle Aerial"},
@@ -165,6 +165,8 @@ function INSERT_DATE()
 
     if filetype == 'org' then
         format = "<%Y-%m-%d>"  -- Org files use <yr-month-day>
+    elseif filetype == 'markdown' then
+        format = "%Y-%m-%d"  -- Org files use <yr-month-day>
     else
         format = "%Y/%m/%d"    -- Other files use yr-month-day
     end
@@ -186,6 +188,8 @@ function INSERT_DATETIME()
 
     if filetype == 'org' then
         format = "<%Y-%m-%d %H:%M>"  -- Org files use <yr-month-day>
+    elseif filetype == 'markdown' then
+        format = "%Y-%m-%d %H:%M"  -- Org files use <yr-month-day>
     else
         format = "%Y/%m/%d %H:%M (%Z)"    -- Other files use yr-month-day
     end
