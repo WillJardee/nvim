@@ -12,5 +12,4 @@ require('appearance')   -- Theme and UI
 -- Statusline (Lualine)
 require('lualine').setup {}
 
-require('utils.wraps')
 
