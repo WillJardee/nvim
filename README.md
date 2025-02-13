@@ -10,7 +10,7 @@ My personal NeoVim setup. A lot of this was built with the help of my peers, `:h
     - [ ] Title capitalization
 - [ ] Plugins
     - [x] Languagetool
-    - [ ] DAP
+    - [ ] [DAP](https://github.com/mfussenegger/nvim-dap)
 - [ ] Bugs/functionality
     - [ ] LaTeX: Aerial support, general lsp support issues
     - [ ] LSP formatting
