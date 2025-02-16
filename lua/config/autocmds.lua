@@ -8,6 +8,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "make",
+    callback = function()
+        vim.opt_local.expandtab = false
+    end,
+})
+
 -- Automatically reload buffers when switching branches
 vim.api.nvim_create_autocmd("User", {
     pattern = "FugitiveHeadChanged",
@@ -26,7 +33,8 @@ vim.api.nvim_create_autocmd("FileType", {
               "latex",
               "gitcommit",
               "gitrebase",
-              "asciidoc"
+              "asciidoc",
+              "tex"
             },
   callback = function()
     -- Text Wrapping and Spell Checking for text-based files
@@ -59,7 +67,8 @@ vim.api.nvim_create_autocmd("FileType", {
       latex = true,
       gitcommit = true,
       gitrebase = true,
-      asciidoc = true
+      asciidoc = true,
+      tex = true
     }
 
     -- Apply code-specific settings for non-text files
@@ -77,5 +86,15 @@ vim.api.nvim_create_autocmd("FileType", {
     end
   end,
   desc = "Disable wrapping, spell checking, and enable code-specific settings for non-text-based filetypes",
+})
+
+-- automatically resize copen to 50
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'qf',
+  callback = function()
+    if vim.fn.winwidth(0) < 50 then
+      vim.cmd('vertical resize 50')
+    end
+  end
 })
 

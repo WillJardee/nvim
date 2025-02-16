@@ -26,6 +26,8 @@ wk.add({
     {'<leader>w', ':w<CR>', opts, desc = "save file" },
     {'<leader>q', ':q<CR>', opts, desc = "quit file" },
     {'<leader>x', ':x<CR>', opts, desc = "save-quit file" },
+    {'<leader>d', ':bd<CR>', opts, desc = "close buffer"},
+    {'<leader>n', ':nohlsearch<CR>', opts, desc = "clear highlights" },
     {'<leader>h', '<C-w>h', opts, desc = "Move to window up"},
     {'<leader>j', '<C-w>j', opts, desc = "Move to window down"},
     {'<leader>k', '<C-w>k', opts, desc = "Move to window left"},
@@ -35,6 +37,7 @@ wk.add({
     {'<a-j>', ':lua vim.cmd("resize +2")<cr>', { noremap = true, silent = true }, desc = "Move window down" },
     {'<a-l>', ':lua vim.cmd("vertical resize -2")<cr>', { noremap = true, silent = true }, desc = "Move window in" },
     {'<a-h>', ':lua vim.cmd("vertical resize +2")<cr>', { noremap = true, silent = true }, desc = "Move window out" },
+    {'<leader>igq', 'Vipgq<CR>', opts, desc = "Format paragraph" },
     {'<Leader>id', ':lua INSERT_DATE()<CR>', { noremap = true, silent = true }, desc = "Insert date"},
     {'<Leader>it', ':lua INSERT_TIME()<CR>', { noremap = true, silent = true }, desc = "Insert time"},
     {'<Leader>ij', ':lua INSERT_DATETIME()<CR>', { noremap = true, silent = true }, desc = "Insert date time"},
@@ -42,10 +45,12 @@ wk.add({
   },
   { mode = {'t'},
     {'<a-c>', [[<C-\><C-n>:q<CR>]], opts, desc="Exit Terminal"}
+  },
+  { mode = {'v'},
+    {'<Leader>li', ':lua incrementletters()<CR>', { noremap = true, silent = true }, desc = "Increment selected characters by 1"},
   }
 })
 
--- local open_readme = require('utils.open_readme')
 -- Telescope plugin keymaps
 wk.add({
   { mode = {'n'},
@@ -173,6 +178,30 @@ wk.add({
 })
 
 
+vim.api.nvim_create_user_command('ProfileLinePython', function(opts)
+  local file = vim.fn.expand('%')
+  vim.cmd('!kernprof -l -v -z ' .. file .. ' > /tmp/profile_output.txt')
+  vim.cmd('cfile /tmp/profile_output.txt')
+  vim.cmd('vert copen')
+end, { nargs = 0 })
+
+vim.api.nvim_create_user_command('ProfilePython', function(opts)
+  local file = vim.fn.expand('%')
+  local output_file = "/tmp/profile_output.txt.prof"
+  vim.cmd('!kernprof -b -o /tmp/profile_output.prof ' .. file)
+  vim.fn.system(string.format("python3 -c 'import pstats; p = pstats.Stats(\"%s\"); p.strip_dirs().sort_stats(\"cumulative\").print_stats(20)' > %s ", "/tmp/profile_output.prof", output_file))
+  vim.cmd(':vs ' .. output_file)
+  vim.cmd(':set nowrap')
+  vim.cmd(':set nospell')
+end, { nargs = 0 })
+
+wk.add({
+    {mode = { 'n' } },
+    {'<Leader>rL', ":ProfileLinePython<CR>", { noremap = true, silent = true }, desc = "Profile Python (kernprof)"},
+    {'<Leader>rP', ":ProfilePython<CR>", { noremap = true, silent = true }, desc = "Profile Python (kernprof)"},
+})
+
+
 -- Function to insert the current date based on file type
 function INSERT_DATE()
     local format
@@ -213,3 +242,22 @@ function INSERT_DATETIME()
     vim.api.nvim_put({ date }, 'c', true, true)  -- Inserts the date at the cursorend
 end
 
+-- -- define function to increment letters by 1 alphabetically
+-- function incrementletters()
+--   -- Get the current visual selection from the default register
+--   local selection = vim.fn.getreg('"')  -- Default register after visual mode
+--   local new_selection = ""
+--
+--   -- Loop through each character in the selection
+--   for i = 1, #selection do
+--     local char = selection:sub(i, i)
+--     local incremented_char = string.char(string.byte(char) + 1)
+--     new_selection = new_selection .. incremented_char
+--   end
+--
+--   -- Echo the new selection for debugging
+--   vim.api.nvim_out_write("New selection: " .. new_selection .. "\n")
+--
+--   -- Set the new selection back into the register
+--   vim.fn.setreg('"', new_selection)  -- Put the modified text back into the default register
+-- end

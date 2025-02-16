@@ -6,6 +6,7 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Setting up languagetool
 vim.opt_local.spelllang = "en_us"   -- Use US English
+vim.o.spellfile = "en.utf-8.add"   -- Use US English
 
 -- Use spaces instead of tabs
 vim.opt.expandtab = true      -- Convert tabs to spaces

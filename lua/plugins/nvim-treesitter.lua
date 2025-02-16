@@ -8,6 +8,9 @@ return {
                       "cpp",
                       "markdown",
                       "bash",
+                      "make",
+                      "cmake",
+                      "tex",
                     }, -- Add languages here
   highlight = { enable = true },
   ignore_install = { 'org' }
